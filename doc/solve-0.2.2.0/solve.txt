@@ -86,6 +86,7 @@ No :: SolveStrategy
 Partition :: SolveStrategy
 TrueBins :: SolveStrategy
 IncrementChoice :: SolveStrategy
+IncrementBins :: SolveStrategy
 data StringMode
 Regex :: StringMode
 Length :: StringMode
@@ -183,6 +184,18 @@ instance GHC.Read.Read RandIncrementChoice.ParamIncrementChoice
 instance GHC.Classes.Ord RandIncrementChoice.ParamIncrementChoice
 instance GHC.Classes.Eq RandIncrementChoice.ParamIncrementChoice
 
+module RandIncrementBins
+randValExprsSolveIncrementBins :: (Variable v) => ParamIncrementBins -> [v] -> [ValExpr v] -> SMT (SolveProblem v)
+data ParamIncrementBins
+ParamIncrementBins :: Int -> Next -> Int -> ParamIncrementBins
+[maxDepth] :: ParamIncrementBins -> Int
+[next] :: ParamIncrementBins -> Next
+[nrOfBins] :: ParamIncrementBins -> Int
+instance GHC.Show.Show RandIncrementBins.ParamIncrementBins
+instance GHC.Read.Read RandIncrementBins.ParamIncrementBins
+instance GHC.Classes.Ord RandIncrementBins.ParamIncrementBins
+instance GHC.Classes.Eq RandIncrementBins.ParamIncrementBins
+
 module Solve
 satSolve :: (Variable v) => [v] -> Assertions v -> SMT SolvableProblem
 solve :: (Variable v) => [v] -> Assertions v -> SMT (SolveProblem v)
@@ -196,6 +209,7 @@ RandNo :: SolveRandParam
 RandPartition :: ParamPartition -> SolveRandParam
 RandTrueBins :: ParamTrueBins -> SolveRandParam
 RandIncrementChoice :: ParamIncrementChoice -> SolveRandParam
+RandIncrementBins :: ParamIncrementBins -> SolveRandParam
 toRandParam :: Params -> SolveRandParam
 instance GHC.Classes.Ord v => GHC.Classes.Ord (Solve.Assertions v)
 instance GHC.Classes.Eq v => GHC.Classes.Eq (Solve.Assertions v)
