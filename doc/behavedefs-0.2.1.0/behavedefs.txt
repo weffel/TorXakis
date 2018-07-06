@@ -9,7 +9,7 @@
 @version 0.2.1.0
 
 module BTree
-type BehAction = Set (ChanId, [Const])
+type BehAction = Set (ChanId, [Constant])
 type BTree = [BBranch]
 data BBranch
 BTpref :: Set CTOffer -> [IVar] -> ValExpr IVar -> INode -> BBranch

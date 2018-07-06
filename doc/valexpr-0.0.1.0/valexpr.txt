@@ -516,40 +516,47 @@ sortOf :: SortOf s => s -> SortId
 
 
 -- | Data structure for constant definitions.
-module ConstDefs
+module Constant
 
 -- | Union of Boolean, Integer, String, and AlgebraicDataType constant
 --   values.
-data Const
-Cbool :: Bool -> Const
-[cBool] :: Const -> Bool
-Cint :: Integer -> Const
-[cInt] :: Const -> Integer
-Cstring :: Text -> Const
-[cString] :: Const -> Text
+data Constant
 
--- | XSD input PvdL: performance gain: translate only once, storing SMT
---   string as well
-Cregex :: Text -> Const
-[cRegex] :: Const -> Text
-Cstr :: CstrId -> [Const] -> Const
-[cstrId] :: Const -> CstrId
-[args] :: Const -> [Const]
-Cany :: SortId -> Const
-[sort] :: Const -> SortId
+-- | Constructor of Boolean constant.
+Cbool :: Bool -> Constant
+[toBool] :: Constant -> Bool
 
--- | Const is Resettable
+-- | Constructor of Integer constant.
+Cint :: Integer -> Constant
+[toInteger] :: Constant -> Integer
 
--- | Const has a Sort.
-instance Data.Data.Data ConstDefs.Const
-instance Control.DeepSeq.NFData ConstDefs.Const
-instance GHC.Generics.Generic ConstDefs.Const
-instance GHC.Show.Show ConstDefs.Const
-instance GHC.Read.Read ConstDefs.Const
-instance GHC.Classes.Ord ConstDefs.Const
-instance GHC.Classes.Eq ConstDefs.Const
-instance Id.Resettable ConstDefs.Const
-instance SortOf.SortOf ConstDefs.Const
+-- | Constructor of String constant.
+Cstring :: Text -> Constant
+[toText] :: Constant -> Text
+
+-- | Constructor of Regular Expression constant.
+Cregex :: Text -> Constant
+
+-- | Regular Expression in XSD format
+[toXSDRegex] :: Constant -> Text
+
+-- | Constructor of constructor constant (value of ADT).
+Ccstr :: CstrId -> [Constant] -> Constant
+[cstrId] :: Constant -> CstrId
+[args] :: Constant -> [Constant]
+
+-- | Constructor of ANY constant.
+Cany :: SortId -> Constant
+[sort] :: Constant -> SortId
+instance Data.Data.Data Constant.Constant
+instance Control.DeepSeq.NFData Constant.Constant
+instance GHC.Generics.Generic Constant.Constant
+instance GHC.Show.Show Constant.Constant
+instance GHC.Read.Read Constant.Constant
+instance GHC.Classes.Ord Constant.Constant
+instance GHC.Classes.Eq Constant.Constant
+instance Id.Resettable Constant.Constant
+instance SortOf.SortOf Constant.Constant
 
 
 -- | Implementation for a symbolic sum.
@@ -671,11 +678,11 @@ view :: ValExpr v -> ValExprView v
 
 -- | Evaluate the provided value expression. Either the Right Constant
 --   Value is returned or a (Left) error message.
-eval :: Show v => ValExpr v -> Either String Const
+eval :: Show v => ValExpr v -> Either String Constant
 
 -- | ValExprView: the public view of value expression <a>ValExpr</a>
 data ValExprView v
-Vconst :: Const -> ValExprView v
+Vconst :: Constant -> ValExprView v
 Vvar :: v -> ValExprView v
 Vequal :: (ValExpr v) -> (ValExpr v) -> ValExprView v
 Vite :: ValExpr v -> ValExpr v -> ValExpr v -> ValExprView v
@@ -722,7 +729,7 @@ SSS :: PredefKind
 class Resettable e
 
 -- | Create a constant as a value expression.
-cstrConst :: Const -> ValExpr v
+cstrConst :: Constant -> ValExpr v
 
 -- | Create a variable as a value expression.
 cstrVar :: v -> ValExpr v

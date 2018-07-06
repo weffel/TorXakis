@@ -108,7 +108,7 @@ instance GHC.Classes.Ord Solve.Params.SolveStrategy
 instance GHC.Classes.Eq Solve.Params.SolveStrategy
 
 module SolveDefs
-type Solution v = Map v Const
+type Solution v = Map v Constant
 data SolvableProblem
 Sat :: SolvableProblem
 Unsat :: SolvableProblem

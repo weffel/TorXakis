@@ -120,7 +120,7 @@ txsSetSeed :: Int -> IOC ()
 -- | Evaluate the provided value expression.
 --   
 --   Only possible when txscore is initialized.
-txsEval :: VExpr -> IOC (Either String Const)
+txsEval :: VExpr -> IOC (Either String Constant)
 
 -- | Type for solve (<tt>txsSolve, </tt>txsUniSolve, and @txsRanSolve)
 type TxsSolveType = VExpr  value expression to solve. -> IOC (WEnv VarId)

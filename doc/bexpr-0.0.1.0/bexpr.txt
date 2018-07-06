@@ -76,7 +76,7 @@ module VarEnv
 type VarEnv v w = Map v (ValExpr w)
 type VExpr = ValExpr VarId
 type VEnv = VarEnv VarId VarId
-type WEnv v = Map v Const
+type WEnv v = Map v Constant
 
 
 -- | This module introduces definitions related to behaviour expressions.

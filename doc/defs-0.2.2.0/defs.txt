@@ -219,7 +219,7 @@ DefGoal :: TxsDef
 type VarEnv v w = Map v ValExpr w
 type VExpr = ValExpr VarId
 type VEnv = VarEnv VarId VarId
-type WEnv v = Map v Const
+type WEnv v = Map v Constant
 data ProcDef :: *
 ProcDef :: [ChanId] -> [VarId] -> BExpr -> ProcDef
 data ProcId :: *
@@ -285,7 +285,7 @@ instance TxsShow.PShow BehExprDefs.Offer
 instance TxsShow.PShow BehExprDefs.ChanOffer
 instance TxsShow.PShow v => TxsShow.PShow (ValExprDefs.ValExpr v)
 instance TxsShow.PShow v => TxsShow.PShow (ValExprDefs.ValExprView v)
-instance TxsShow.PShow ConstDefs.Const
+instance TxsShow.PShow Constant.Constant
 instance (TxsShow.PShow v, TxsShow.PShow w) => TxsShow.PShow (VarEnv.VarEnv v w)
 instance TxsShow.PShow BehExprDefs.Trans
 instance TxsShow.PShow TxsDef.TxsDef
@@ -317,7 +317,7 @@ instance TxsShow.PShow GHC.Types.Int
 
 module TxsDDefs
 data Action
-Act :: (Set (ChanId, [Const])) -> Action
+Act :: (Set (ChanId, [Constant])) -> Action
 ActQui :: Action
 data SAction
 SAct :: Connection -> Text -> SAction
@@ -411,6 +411,6 @@ scnd :: (a, b, c) -> b
 thrd :: (a, b, c) -> c
 
 module XmlFormat
-constToXml :: TxsDefs -> Const -> Text
-constFromXml :: TxsDefs -> SortId -> Text -> Const
+constToXml :: TxsDefs -> Constant -> Text
+constFromXml :: TxsDefs -> SortId -> Text -> Constant
 instance Data.String.IsString XmlFormat.XMLTree
