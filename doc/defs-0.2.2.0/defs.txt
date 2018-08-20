@@ -223,7 +223,7 @@ type WEnv v = Map v Constant
 data ProcDef :: *
 ProcDef :: [ChanId] -> [VarId] -> BExpr -> ProcDef
 data ProcId :: *
-ProcId :: Name -> Id -> [ChanId] -> [VarId] -> ExitSort -> ProcId
+ProcId :: Name -> Id -> [ChanSort] -> [SortId] -> ExitSort -> ProcId
 data ChanId :: *
 ChanId :: Name -> Id -> [SortId] -> ChanId
 data StatId :: *

@@ -30,12 +30,15 @@ NoExit :: ExitSort
 Exit :: [SortId] -> ExitSort
 Hit :: ExitSort
 exitSortIds :: ExitSort -> [SortId]
+newtype ChanSort
+ChanSort :: [SortId] -> ChanSort
+toChanSort :: ChanId -> ChanSort
 data ProcId
-ProcId :: Name -> Id -> [ChanId] -> [VarId] -> ExitSort -> ProcId
+ProcId :: Name -> Id -> [ChanSort] -> [SortId] -> ExitSort -> ProcId
 [name] :: ProcId -> Name
 [unid] :: ProcId -> Id
-[procchans] :: ProcId -> [ChanId]
-[procvars] :: ProcId -> [VarId]
+[procchans] :: ProcId -> [ChanSort]
+[procvars] :: ProcId -> [SortId]
 [procexit] :: ProcId -> ExitSort
 instance Data.Data.Data ProcId.ProcId
 instance Control.DeepSeq.NFData ProcId.ProcId
@@ -44,6 +47,13 @@ instance GHC.Show.Show ProcId.ProcId
 instance GHC.Read.Read ProcId.ProcId
 instance GHC.Classes.Ord ProcId.ProcId
 instance GHC.Classes.Eq ProcId.ProcId
+instance Data.Data.Data ProcId.ChanSort
+instance Control.DeepSeq.NFData ProcId.ChanSort
+instance GHC.Generics.Generic ProcId.ChanSort
+instance GHC.Show.Show ProcId.ChanSort
+instance GHC.Read.Read ProcId.ChanSort
+instance GHC.Classes.Ord ProcId.ChanSort
+instance GHC.Classes.Eq ProcId.ChanSort
 instance Data.Data.Data ProcId.ExitSort
 instance Control.DeepSeq.NFData ProcId.ExitSort
 instance GHC.Generics.Generic ProcId.ExitSort
@@ -53,6 +63,8 @@ instance GHC.Classes.Ord ProcId.ExitSort
 instance GHC.Classes.Eq ProcId.ExitSort
 instance Id.Resettable ProcId.ProcId
 instance Id.Identifiable ProcId.ProcId
+instance Id.Resettable ProcId.ChanSort
+instance Id.Identifiable ProcId.ChanSort
 instance Id.Resettable ProcId.ExitSort
 instance Id.Identifiable ProcId.ExitSort
 
