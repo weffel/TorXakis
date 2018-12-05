@@ -710,7 +710,7 @@ Vstrinre :: ValExpr v -> ValExpr v -> ValExprView v
 [regex] :: ValExprView v -> ValExpr v
 Vcstr :: CstrId -> [ValExpr v] -> ValExprView v
 Viscstr :: CstrId -> (ValExpr v) -> ValExprView v
-Vaccess :: CstrId -> Int -> (ValExpr v) -> ValExprView v
+Vaccess :: CstrId -> Text -> Int -> (ValExpr v) -> ValExprView v
 Vfunc :: FuncId -> [ValExpr v] -> ValExprView v
 Vpredef :: PredefKind -> FuncId -> [ValExpr v] -> ValExprView v
 
@@ -802,7 +802,7 @@ cstrIsCstr :: CstrId -> ValExpr v -> ValExpr v
 -- | Apply ADT Accessor of constructor with CstrId on field with given
 --   position on the provided value expression. Preconditions are
 --   <i>not</i> checked.
-cstrAccess :: CstrId -> Int -> ValExpr v -> ValExpr v
+cstrAccess :: CstrId -> Text -> Int -> ValExpr v -> ValExpr v
 
 -- | Create a call to a predefined function as a value expression.
 cstrPredef :: PredefKind -> FuncId -> [ValExpr v] -> ValExpr v

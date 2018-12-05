@@ -175,7 +175,7 @@ equalHandler :: Ord v => Handler v
 notEqualHandler :: Ord v => Handler v
 cstrHandler :: CstrId -> Handler v
 iscstrHandler :: CstrId -> Handler v
-accessHandler :: CstrId -> Int -> Handler v
+accessHandler :: CstrId -> Text -> Int -> Handler v
 stdSortTable :: Map Text SortId
 stdFuncTable :: (Ord v, Integral (ValExpr v)) => FuncTable v
 stdTDefs :: [(Ident, TxsDef)]
